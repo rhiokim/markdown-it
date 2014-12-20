@@ -1,5 +1,6 @@
 coverage/
-demo/sample.js
+support/demo/sample.js
 demo-web/
+demo/
 dist/
 node_modules

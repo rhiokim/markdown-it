@@ -13,10 +13,14 @@ GITHUB_PROJ := https://github.com//markdown-it/${NPM_PACKAGE}
 
 
 demo: lint
-	./support/demodata.js > demo/sample.json
-	jade demo/index.jade -P --obj demo/sample.json
-	stylus -u autoprefixer-stylus demo/assets/index.styl
-	rm -rf demo/sample.json
+	rm -rf ./demo
+	mkdir ./demo
+	./support/demodata.js > ./demo/sample.json
+	jade --pretty --obj ./demo/sample.json --out ./demo ./support/demo/index.jade
+	stylus --use autoprefixer-stylus --out ./demo ./support/demo/index.styl
+	cp ./support/demo/index.js ./demo
+	cp ./dist/markdown-it.js ./demo
+	rm -rf ./demo/sample.json
 
 gh-pages: browserify demo
 	rm -rf ./demo-web
